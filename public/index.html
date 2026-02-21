@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Elite Salon Manager | Premium Admin Dashboard</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+</head>
+
+<body>
+    <div class="background-blobs">
+        <div class="blob blob-1"></div>
+        <div class="blob blob-2"></div>
+        <div class="blob blob-3"></div>
+    </div>
+
+    <main class="container">
+        <header>
+            <div class="badge">Admin Panel</div>
+            <h1>Elite Salon <span>Manager</span></h1>
+            <p>Curate and manage premium salon experiences</p>
+        </header>
+
+        <section class="form-section">
+            <div class="glass-card">
+                <div class="card-header">
+                    <h2><i class="fas fa-plus-circle"></i> Register New Salon</h2>
+                </div>
+                <form id="salonForm">
+                    <div class="form-grid">
+                        <div class="input-group">
+                            <label for="name">Salon Name</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-store"></i>
+                                <input type="text" id="name" placeholder="e.g. Style Studio" required>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="city">City</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-location-dot"></i>
+                                <input type="text" id="city" placeholder="e.g. Delhi" required>
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="rating">Rating</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-star"></i>
+                                <input type="number" id="rating" step="0.1" min="0" max="5" placeholder="4.5">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="images">Gallery Images (Max 5)</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-images"></i>
+                                <input type="file" id="images" name="images" multiple accept="image/*">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="latitude">Latitude</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-map-pin"></i>
+                                <input type="number" id="latitude" step="0.0001" placeholder="28.6139">
+                            </div>
+                        </div>
+                        <div class="input-group">
+                            <label for="longitude">Longitude</label>
+                            <div class="input-wrapper">
+                                <i class="fas fa-map-location-dot"></i>
+                                <input type="number" id="longitude" step="0.0001" placeholder="77.2090">
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="features-section">
+                        <h3><i class="fas fa-list-check"></i> Services & Features</h3>
+                        <p class="section-hint">Define services for each category (JSON format for now for brevity)</p>
+                        <div class="input-group">
+                            <textarea id="featuresJson" rows="5" placeholder='{
+  "haircut": [{"id": "h1", "name": "Classic Fade", "time": "30 min", "rate": 500}],
+  "spa": [{"id": "s1", "name": "Head Massage", "time": "20 min", "rate": 400}],
+  "makeup": [],
+  "facial": []
+}'></textarea>
+                            <small>Pro Tip: You can leave categories empty if not applicable.</small>
+                        </div>
+                    </div>
+
+                    <button type="submit" id="submitBtn" class="primary-btn">
+                        <span>Save Salon Details</span>
+                        <i class="fas fa-arrow-right"></i>
+                    </button>
+                </form>
+            </div>
+        </section>
+
+        <section class="list-section">
+            <div class="list-header">
+                <div>
+                    <h2><i class="fas fa-gem"></i> Curated Salons</h2>
+                    <p id="salonCount">0 Salons Found</p>
+                </div>
+                <button id="refreshBtn" class="icon-btn">
+                    <i class="fas fa-sync-alt"></i>
+                </button>
+            </div>
+
+            <div id="salonGrid" class="salon-grid">
+                <!-- Cards will be injected here -->
+            </div>
+
+            <div id="loader" class="loader hidden">
+                <div class="spinner-container">
+                    <div class="spinner"></div>
+                    <p>Fetching data...</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <div id="toast" class="toast hidden"></div>
+
+    <script src="script.js"></script>
+</body>
+
+</html>

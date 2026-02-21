@@ -1,0 +1,42 @@
+# Project Working Instructions & History
+
+## Recent Implementation: AWS S3 Image Upload
+Date: 2026-02-21
+
+### 1. Backend Changes (server.js)
+- Installed `@aws-sdk/client-s3`, `multer`, and `multer-s3`.
+- Configured `S3Client` for AWS connection.
+- Implemented `multerS3` storage for direct uploads to S3.
+- Updated `POST /api/salons` to handle `multipart/form-data` and save the S3 `location` URL to MongoDB.
+
+### 2. Frontend Changes (public/)
+- **index.html**: Replaced the URL text input with a file input (`<input type="file">`) for device image selection.
+- **script.js**: Updated form submission to use `FormData` object instead of JSON to support file uploads.
+
+### 3. Environment Setup (.env)
+- Added AWS configuration keys:
+  - `AWS_ACCESS_KEY_ID`
+  - `AWS_SECRET_ACCESS_KEY`
+  - `AWS_REGION`
+  - `AWS_S3_BUCKET_NAME`
+
+---
+
+## 🛠 Required Configuration
+1. Fill in actual AWS credentials in the `.env` file.
+2. Ensure S3 Bucket has "Public access" enabled or appropriate Bucket Policy if using `public-read` ACL.
+3. Ensure CORS is configured on the S3 bucket to allow the origin.
+
+---
+
+## 📝 Working Note Policy
+**Every time a change is made or a new feature is implemented, it MUST be documented in this file below this line.**
+
+---
+### Current Work Log:
+- [2026-02-21] Initialized AWS S3 image upload functionality and connected it to Salon management system.
+- [2026-02-21] Troubleshooted MongoDB Atlas connection error. Guided user to whitelist IP address in the Atlas Network Access panel.
+- [2026-02-21] Fixed AWS S3 error "Region not accepted". The region must be a short code (like `ap-south-1`) instead of the full descriptive name.
+- [2026-02-21] Fixed S3 "AccessControlListNotSupported" error by removing ACLs from the upload code. Modern S3 buckets disable ACLs by default. Guided user to use Bucket Policy for public access.
+- [2026-02-21] Replaced `via.placeholder.com` with `placehold.co` because the former was causing DNS resolution errors (`ERR_NAME_NOT_RESOLVED`).
+- [2026-02-21] Updated configuration to use the new S3 bucket name: `akhilbhartis3bucket1`.
