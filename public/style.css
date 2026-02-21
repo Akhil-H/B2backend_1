@@ -120,6 +120,7 @@ header h1 {
 header h1 span {
     background: linear-gradient(135deg, var(--primary), var(--secondary));
     -webkit-background-clip: text;
+    background-clip: text;
     -webkit-text-fill-color: transparent;
 }
 
@@ -218,27 +219,174 @@ header p {
     color: var(--primary);
 }
 
-/* Features Section */
-.features-section {
-    background: rgba(0, 0, 0, 0.2);
-    padding: 1.5rem;
+.full-width {
+    grid-column: 1 / -1;
+}
+
+.file-input-wrapper {
+    cursor: pointer;
+}
+
+.file-input-wrapper input[type="file"] {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    opacity: 0;
+    cursor: pointer;
+    z-index: 2;
+}
+
+.file-custom-btn {
+    width: 100%;
+    padding: 1rem 1.25rem 1rem 3.25rem;
+    background: rgba(255, 255, 255, 0.03);
+    border: 1px solid var(--glass-border);
     border-radius: var(--radius-md);
-    margin-bottom: 2rem;
+    color: var(--text-muted);
+    font-size: 0.95rem;
+    display: block;
+}
+
+.image-preview-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(80px, 1fr));
+    gap: 1rem;
+    margin-top: 1rem;
+}
+
+.preview-item {
+    position: relative;
+    aspect-ratio: 1;
+    border-radius: var(--radius-md);
+    overflow: hidden;
     border: 1px solid var(--glass-border);
 }
 
-.features-section h3 {
+.preview-item img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.preview-item .remove-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: rgba(239, 68, 68, 0.8);
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 10px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Features Section */
+.features-details {
+    background: rgba(0, 0, 0, 0.2);
+    border-radius: var(--radius-md);
+    margin-bottom: 2rem;
+    border: 1px solid var(--glass-border);
+    overflow: hidden;
+}
+
+.features-details summary {
+    list-style: none;
+    cursor: pointer;
+    padding: 1.5rem;
+    transition: background 0.3s;
+}
+
+.features-details summary::-webkit-details-marker {
+    display: none;
+}
+
+.features-details summary:hover {
+    background: rgba(255, 255, 255, 0.02);
+}
+
+.features-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.features-header h3 {
     font-size: 1.1rem;
-    margin-bottom: 0.5rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
+    margin: 0;
+}
+
+.features-details[open] .features-header i.fa-chevron-down {
+    transform: rotate(180deg);
+}
+
+.features-content {
+    padding: 0 1.5rem 1.5rem 1.5rem;
+    animation: slideDown 0.3s ease-out;
+}
+
+@keyframes slideDown {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
 }
 
 .section-hint {
     font-size: 0.85rem;
     color: var(--text-muted);
     margin-bottom: 1rem;
+}
+
+/* Search Bar */
+.search-container {
+    flex-grow: 1;
+    max-width: 400px;
+}
+
+.search-wrapper {
+    position: relative;
+    display: flex;
+    align-items: center;
+}
+
+.search-wrapper i {
+    position: absolute;
+    left: 1rem;
+    color: var(--text-muted);
+    font-size: 0.9rem;
+}
+
+.search-wrapper input {
+    width: 100%;
+    padding: 0.8rem 1rem 0.8rem 2.8rem;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid var(--glass-border);
+    border-radius: 50px;
+    color: white;
+    font-size: 0.9rem;
+    outline: none;
+    transition: all 0.3s ease;
+}
+
+.search-wrapper input:focus {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: var(--secondary);
+    box-shadow: 0 0 0 4px rgba(56, 189, 248, 0.1);
 }
 
 /* Buttons */
@@ -357,6 +505,28 @@ header p {
     background: rgba(0, 0, 0, 0.6);
     color: #fbbf24;
     border: 1px solid rgba(251, 191, 36, 0.3);
+}
+
+.image-count-badge {
+    background: rgba(0, 0, 0, 0.6);
+    color: var(--primary);
+    padding: 0.4rem 0.8rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(192, 132, 252, 0.3);
+}
+
+.coords-badge {
+    background: rgba(0, 0, 0, 0.6);
+    color: var(--secondary);
+    padding: 0.4rem 0.8rem;
+    border-radius: 50px;
+    font-size: 0.75rem;
+    font-weight: 700;
+    backdrop-filter: blur(8px);
+    border: 1px solid rgba(56, 189, 248, 0.3);
 }
 
 .location-badge {
@@ -528,4 +698,20 @@ header p {
         align-items: flex-start;
         gap: 1rem;
     }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+.fade-in {
+    animation: fadeIn 0.4s ease-out forwards;
 }

@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Elite Salon Manager | Premium Admin Dashboard</title>
+    <title>Big Barber | Admin Dashboard</title>
     <link rel="stylesheet" href="style.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
@@ -23,8 +23,8 @@
     <main class="container">
         <header>
             <div class="badge">Admin Panel</div>
-            <h1>Elite Salon <span>Manager</span></h1>
-            <p>Curate and manage premium salon experiences</p>
+            <h1>Big Barber <span>Admin</span></h1>
+            <p>Directly manage and monitor salons stored in MongoDB Atlas</p>
         </header>
 
         <section class="form-section">
@@ -55,12 +55,14 @@
                                 <input type="number" id="rating" step="0.1" min="0" max="5" placeholder="4.5">
                             </div>
                         </div>
-                        <div class="input-group">
+                        <div class="input-group full-width">
                             <label for="images">Gallery Images (Max 5)</label>
-                            <div class="input-wrapper">
+                            <div class="input-wrapper file-input-wrapper">
                                 <i class="fas fa-images"></i>
                                 <input type="file" id="images" name="images" multiple accept="image/*">
+                                <span class="file-custom-btn">Select Photos</span>
                             </div>
+                            <div id="imagePreview" class="image-preview-grid"></div>
                         </div>
                         <div class="input-group">
                             <label for="latitude">Latitude</label>
@@ -78,19 +80,25 @@
                         </div>
                     </div>
 
-                    <div class="features-section">
-                        <h3><i class="fas fa-list-check"></i> Services & Features</h3>
-                        <p class="section-hint">Define services for each category (JSON format for now for brevity)</p>
-                        <div class="input-group">
-                            <textarea id="featuresJson" rows="5" placeholder='{
+                    <details class="features-details">
+                        <summary>
+                            <div class="features-header">
+                                <h3><i class="fas fa-list-check"></i> Advanced Services (Optional)</h3>
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </summary>
+                        <div class="features-content">
+                            <p class="section-hint">Define specialized services in JSON format.</p>
+                            <div class="input-group">
+                                <textarea id="featuresJson" rows="5" placeholder='{
   "haircut": [{"id": "h1", "name": "Classic Fade", "time": "30 min", "rate": 500}],
   "spa": [{"id": "s1", "name": "Head Massage", "time": "20 min", "rate": 400}],
   "makeup": [],
   "facial": []
 }'></textarea>
-                            <small>Pro Tip: You can leave categories empty if not applicable.</small>
+                            </div>
                         </div>
-                    </div>
+                    </details>
 
                     <button type="submit" id="submitBtn" class="primary-btn">
                         <span>Save Salon Details</span>
@@ -103,8 +111,14 @@
         <section class="list-section">
             <div class="list-header">
                 <div>
-                    <h2><i class="fas fa-gem"></i> Curated Salons</h2>
+                    <h2><i class="fas fa-database"></i> MongoDB Atlas Salons</h2>
                     <p id="salonCount">0 Salons Found</p>
+                </div>
+                <div class="search-container">
+                    <div class="search-wrapper">
+                        <i class="fas fa-search"></i>
+                        <input type="text" id="searchInput" placeholder="Search saved salons...">
+                    </div>
                 </div>
                 <button id="refreshBtn" class="icon-btn">
                     <i class="fas fa-sync-alt"></i>
